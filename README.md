@@ -1,1 +1,1 @@
-# ShortLinkDjango
+# core
