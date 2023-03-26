@@ -5,6 +5,7 @@ from django.contrib.sites.models import Site
 
 from apps.utils.models import DateBasic, StatusBasic
 from apps.shortener.utils import generate_short_url
+from apps.shortener.models.model_category import Category
 
 
 class Shortener(DateBasic, StatusBasic):
@@ -14,6 +15,7 @@ class Shortener(DateBasic, StatusBasic):
 
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, verbose_name=_('user'),
                              related_name='shortener')
+    category = models.OneToOneField(Category, verbose_name='Category',on_delete=models.CASCADE, related_name='shortener', blank=True, null=True)
     long_url = models.URLField(_('Long URL'))
     short = models.CharField(_('Short'), max_length=50, blank=True, null=True, unique=True)
     password = models.CharField(_('Password'), max_length=15, blank=True, null=True)  # TODO:add validator
