@@ -2,10 +2,9 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
 from django.contrib.sites.models import Site
-from qrcode.compat.pil import Image
 
 from apps.utils.models import DateBasic, StatusBasic
-from apps.shortener.utils import generate_short_url, generate_QR_code
+from apps.shortener.utils import generate_short_url
 
 
 class Shortener(DateBasic, StatusBasic):

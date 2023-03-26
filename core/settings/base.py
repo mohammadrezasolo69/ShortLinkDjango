@@ -45,6 +45,7 @@ THIRD_PARTY_APPS = [
     'corsheaders',
     'modeltranslation',
     'django_filters',
+    'colorfield',
 ]
 
 MY_APPS = [
