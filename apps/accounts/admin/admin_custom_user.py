@@ -11,7 +11,7 @@ class CustomUserAdmin(admin.ModelAdmin):
     ordering = ('id',)
 
     fieldsets = (
-        (_('Main'), {'fields': ('email', 'first_name', 'last_name')}),
+        (_('Main'), {'fields': ('email', 'first_name', 'last_name','avatar')}),
         (_('Permission'), {'fields': ('is_active', 'is_staff', 'is_superuser')}),
         (_('Data'), {'fields': ('date_joined',)}),
     )
