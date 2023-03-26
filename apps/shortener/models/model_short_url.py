@@ -4,6 +4,7 @@ from django.utils.translation import gettext_lazy as _
 from django.contrib.sites.models import Site
 
 from apps.utils.models import DateBasic, StatusBasic
+from apps.shortener.utils import generate_short_url
 
 
 class Shortener(DateBasic, StatusBasic):
@@ -24,10 +25,13 @@ class Shortener(DateBasic, StatusBasic):
     def __str__(self):
         return self.short
 
+    def save(self, *args, **kwargs):
+        if self.short in None:
+            self.short = generate_short_url(length=10)
+        super().save(*args, **kwargs)
+
     def get_expired_at(self):
         return self.expired_at.strftime('%H:%M - %Y/%m/%d')
 
     def get_short_url(self):
         return f"https://{Site.objects.get_current().domain}/{self.short}"
-
-    # TODO: write method save for generate short
