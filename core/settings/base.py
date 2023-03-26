@@ -47,6 +47,7 @@ THIRD_PARTY_APPS = [
 MY_APPS = [
     'apps.utils.apps.UtilsConfig',
     'apps.accounts.apps.AccountsConfig',
+    'apps.shortener.apps.ShortenerConfig',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS + MY_APPS
