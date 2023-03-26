@@ -1,0 +1,1 @@
+from .model_short_url import Shortener
