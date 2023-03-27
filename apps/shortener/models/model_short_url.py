@@ -18,14 +18,13 @@ class Shortener(DateBasic, StatusBasic):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, verbose_name=_('user'),
                              related_name='shortener')
     category = models.ForeignKey(Category, verbose_name='Category', on_delete=models.CASCADE,
-                                    related_name='shortener', blank=True, null=True)
+                                 related_name='shortener', blank=True, null=True)
     long_url = models.URLField(_('Long URL'))
     short = models.CharField(_('Short'), validators=[NoAspacesAllowed], max_length=50, blank=True, null=True,
                              unique=True)
     password = models.CharField(_('Password'), max_length=15, blank=True, null=True)  # TODO:add validator
     expired_at = models.DateTimeField(_('Expired Time'), blank=True, null=True)
     QR_code = models.ImageField(_('QR Code'), blank=True, null=True, upload_to='shortener/short_urls/QR')
-
 
     def __str__(self):
         return self.short
@@ -58,6 +57,6 @@ class Shortener(DateBasic, StatusBasic):
 
     @property
     def expired_at_active(self):
-        if self.expired_at:
-            return True
-        return False
+        if not self.expired_at:
+            return 'not set'
+        return self.get_expired_at

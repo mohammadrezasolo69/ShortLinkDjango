@@ -1,0 +1,1 @@
+from .viewset_shortener import ShortenerViewSet
