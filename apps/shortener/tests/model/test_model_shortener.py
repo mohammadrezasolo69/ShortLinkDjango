@@ -46,7 +46,6 @@ class ShortenerModelTestCase(test.TestCase):
         self.assertIsNotNone(self.shortener_two.get_short_url)
         self.assertEqual(self.shortener_one.get_short_url, f"https://{Site.objects.get_current().domain}/MyURL")
 
-    def test_password_active(self):
-        self.assertTrue(self.shortener_two.password_active)
-        self.assertFalse(self.shortener_one.password_active)
-
+    def test_set_password(self):
+        self.assertTrue(self.shortener_two.set_password)
+        self.assertFalse(self.shortener_one.set_password)

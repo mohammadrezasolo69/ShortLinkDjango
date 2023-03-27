@@ -44,13 +44,13 @@ class Shortener(DateBasic, StatusBasic):
         return f"https://{Site.objects.get_current().domain}/{self.short}"
 
     @property
-    def password_active(self):
+    def set_password(self):
         if self.password:
             return True
         return False
 
     @property
-    def QR_code_active(self):
+    def set_QR_code(self):
         if self.QR_code:
             return True
         return False
