@@ -17,7 +17,7 @@ class Shortener(DateBasic, StatusBasic):
 
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, verbose_name=_('user'),
                              related_name='shortener')
-    category = models.OneToOneField(Category, verbose_name='Category', on_delete=models.CASCADE,
+    category = models.ForeignKey(Category, verbose_name='Category', on_delete=models.CASCADE,
                                     related_name='shortener', blank=True, null=True)
     long_url = models.URLField(_('Long URL'))
     short = models.CharField(_('Short'), validators=[NoAspacesAllowed], max_length=50, blank=True, null=True,
