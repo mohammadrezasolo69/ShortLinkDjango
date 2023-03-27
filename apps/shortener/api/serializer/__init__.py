@@ -1,2 +1,3 @@
 from .serializer_shortener_list import ShortenerListSerializer
 from .serializer_shortener_detail import ShortenerDetailSerializer
+from .serializer_shortener_create_updat import ShortenerCreateUpdateSerializer
