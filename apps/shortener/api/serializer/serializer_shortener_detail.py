@@ -12,7 +12,7 @@ class ShortenerDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Shortener
         fields = (
-            'id', 'user', 'category', 'long_url', 'short_url', 'expired_at', 'password_active'
+            'id', 'user', 'category', 'long_url', 'short_url', 'expired_at', 'password_active','status'
         )
         read_only_fields = (
             'id','user', 'category', 'long_url', 'short_url', 'expired_at', 'password_active'
