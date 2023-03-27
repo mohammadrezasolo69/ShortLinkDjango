@@ -13,7 +13,7 @@ class Category(DateBasic, StatusBasic):
         verbose_name_plural = _('Categories')
 
     title = models.CharField(_('title'), max_length=220)
-    slug = models.SlugField(_('slug'), unique=True)
+    slug = models.SlugField(_('slug'), unique=True,blank=True)
     color = ColorField(_('Color'), default='#32a852')
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, verbose_name=_('user'),
                              related_name='categories')
