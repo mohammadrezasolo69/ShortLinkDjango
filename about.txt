@@ -8,5 +8,9 @@
     - test viewset(create,update,list,detail,delete) with jwt and permission
 
 - Optimize Database
+  - Shortener
+    - use select_related for user and category
 
-
+- Cache
+ - Shortener
+    - cache action detail
