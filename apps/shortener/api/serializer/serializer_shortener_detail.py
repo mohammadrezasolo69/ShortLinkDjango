@@ -5,7 +5,7 @@ from apps.shortener.models import Shortener
 
 class ShortenerDetailSerializer(serializers.ModelSerializer):
     short_url = serializers.URLField(source='get_short_url')
-    expired_at = serializers.CharField(source='expired_at_active')
+    expired_at = serializers.CharField(source='set_expired_at')
 
     # TODO:add Statistics
 
