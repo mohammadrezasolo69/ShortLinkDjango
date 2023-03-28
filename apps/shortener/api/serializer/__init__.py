@@ -7,3 +7,4 @@ from .serializer_shortener_create_updat import ShortenerCreateUpdateSerializer
 
 from .serializer_category_list import CategoryListSerializer
 from .serializer_category_detail import CategoryDetailSerializer
+from .serializer_category_create_update import CategoryCreateUpdateSerializer
