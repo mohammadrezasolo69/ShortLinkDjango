@@ -128,7 +128,7 @@ LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 # Config MultiLanguage
 LANGUAGES = (('en', 'English'),)
-LOCALE_PATHS = [os.path.join(BASE_DIR, 'locale/')]
+LOCALE_PATHS = [os.path.join(BASE_DIR, '../locale/')]
 
 USE_I18N = True
 USE_L10N = True
@@ -142,10 +142,10 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'assets')
 ]
 
-STATIC_ROOT = BASE_DIR / 'static'
+STATIC_ROOT = BASE_DIR / '../static'
 
 MEDIA_URL = 'media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = BASE_DIR / '../media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
