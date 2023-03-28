@@ -1,0 +1,1 @@
+from .test_viewset_shortener import ShortenerViewSetTestCase
