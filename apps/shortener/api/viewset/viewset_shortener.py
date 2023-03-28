@@ -14,8 +14,8 @@ class ShortenerViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated, custom_permissions.IsUser]
 
     def get_queryset(self):
-        qs = self.model.objects.all().filter(user=self.request.user)
-        return qs
+        return self.model.objects.select_related(
+            'user', 'category').filter(user=self.request.user)
 
     def get_serializer_class(self):
         if self.action == 'list':

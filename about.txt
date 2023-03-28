@@ -1,2 +1,12 @@
 - Custom Permission
   - write custom permission for shortener
+
+- Testing
+  - Shortener
+    - test model
+    - test router
+    - test viewset(create,update,list,detail,delete) with jwt and permission
+
+- Optimize Database
+
+
