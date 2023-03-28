@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.contrib.sites.models import Site
 
@@ -33,6 +34,9 @@ class Shortener(DateBasic, StatusBasic):
         if not self.short:
             self.short = generate_short_url(length=10)
 
+        if not self.check_expired_at:
+            self.status = 'IA'
+
         super().save(*args, **kwargs)
 
     @property
@@ -56,7 +60,15 @@ class Shortener(DateBasic, StatusBasic):
         return False
 
     @property
-    def expired_at_active(self):
+    def check_expired_at(self):
+        if self.expired_at:
+            if self.expired_at >= timezone.now():
+                return True
+            return False
+        return 'not set'
+
+    @property
+    def set_expired_at(self):
         if not self.expired_at:
             return 'not set'
         return self.get_expired_at

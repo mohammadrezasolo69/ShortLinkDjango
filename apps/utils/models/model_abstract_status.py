@@ -6,4 +6,8 @@ class StatusBasic(models.Model):
     class Meta:
         abstract = True
 
-    status = models.BooleanField(_('Status'), default=True)
+    class StatusChooses(models.TextChoices):
+        Active = 'AC'
+        Inactive = 'IA'
+
+    status = models.CharField(_('Status'), max_length=2, default=StatusChooses.Active, choices=StatusChooses.choices)
