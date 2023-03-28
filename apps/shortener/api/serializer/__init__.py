@@ -1,4 +1,5 @@
 from .serializer_base_shoetener import ShortenerBaseSerializer
+from .serializer_base_category import CategoryBaseSerializer
 
 from .serializer_shortener_list import ShortenerListSerializer
 from .serializer_shortener_detail import ShortenerDetailSerializer
