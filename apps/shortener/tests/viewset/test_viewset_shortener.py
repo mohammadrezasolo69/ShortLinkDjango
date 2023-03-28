@@ -44,3 +44,20 @@ class ShortenerViewSetTestCase(test.APITestCase):
         response = self.client.get(path)
 
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+    def test_retrieve(self):
+        path = reverse('shortener:shortener-detail',kwargs={'pk':1})
+        response = self.client.get(path, **self.auth_headers)
+
+        shortener = Shortener.objects.get(pk=1)
+        serializer = ShortenerDetailSerializer(shortener)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data, serializer.data)
+
+    def test_retrieve_no_permission(self):
+        path = reverse('shortener:shortener-detail',kwargs={'pk':1})
+        response = self.client.get(path)
+
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
