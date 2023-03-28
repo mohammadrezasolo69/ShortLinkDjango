@@ -61,3 +61,19 @@ class ShortenerViewSetTestCase(test.APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
+    def test_delete(self):
+        path = reverse('shortener:shortener-detail',kwargs={'pk':1})
+        response = self.client.delete(path, **self.auth_headers)
+
+        shortener = Shortener.objects.all().count()
+
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertEqual(shortener, 0)
+
+    def test_delete_no_permission(self):
+        path = reverse('shortener:shortener-detail',kwargs={'pk':1})
+        response = self.client.delete(path)
+
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+
