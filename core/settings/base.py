@@ -32,11 +32,6 @@ DJANGO_APPS = [
     'django.contrib.sites',
 ]
 
-LOCAL_APPS = [
-    "django_seed",
-    "debug_toolbar",
-]
-
 THIRD_PARTY_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
@@ -54,7 +49,7 @@ MY_APPS = [
     'apps.shortener.apps.ShortenerConfig',
 ]
 
-INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS + MY_APPS
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + MY_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -64,8 +59,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
-
 ]
 
 ROOT_URLCONF = 'core.urls'

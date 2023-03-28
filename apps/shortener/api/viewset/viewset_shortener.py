@@ -17,6 +17,7 @@ class ShortenerViewSet(viewsets.ModelViewSet):
         return self.model.objects.select_related(
             'user', 'category').filter(user=self.request.user)
 
+
     def get_serializer_class(self):
         if self.action == 'list':
             return ShortenerListSerializer

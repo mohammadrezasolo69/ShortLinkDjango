@@ -20,7 +20,8 @@ urlpatterns = [
     path('schema/', SpectacularAPIView.as_view(api_version='v1'), name='schema'),
     path('redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
     path('', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
-    path('__debug__/', include('debug_toolbar.urls')), ]
+    path('__debug__/', include('debug_toolbar.urls')),
+]
 
 # -------------------------------- Config Static and Media File -----------------------------------
 from django.conf import settings
