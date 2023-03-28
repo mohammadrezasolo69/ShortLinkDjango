@@ -1,9 +1,12 @@
 from rest_framework import serializers
 
 from apps.shortener.models import Shortener
+from apps.shortener.api.serializer import CategoryBaseSerializer
 
 
 class ShortenerCreateUpdateSerializer(serializers.ModelSerializer):
+    category = CategoryBaseSerializer()
+
     class Meta:
         model = Shortener
         exclude = ('QR_code', 'status')

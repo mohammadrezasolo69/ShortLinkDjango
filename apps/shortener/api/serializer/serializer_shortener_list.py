@@ -1,12 +1,14 @@
 from rest_framework import serializers
 
 from apps.shortener.models import Shortener
+from apps.shortener.api.serializer import CategoryBaseSerializer
 
 
 class ShortenerListSerializer(serializers.ModelSerializer):
     short_url = serializers.URLField(source='get_short_url')
     created_at = serializers.CharField(source='get_created_at')
     expired_at = serializers.CharField(source='set_expired_at')
+    category = CategoryBaseSerializer()
 
     # TODO:count click in link
 
