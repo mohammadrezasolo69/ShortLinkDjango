@@ -44,10 +44,20 @@ class ShortenerViewSetTestCase(test.APITestCase):
             'password': 'ss',
         }
 
+        self.update_valid_date = {
+            "user": self.user,
+            "long_url": 'https://example.com',
+        }
+
+        self.no_update_valid_date = {
+            "user": '',
+            "long_url": '',
+        }
+
     # --------------------------------- List --------------------------------------
     def test_list(self):
         path = reverse('shortener:shortener-list')
-        response = self.client.get(path, **self.auth_headers)
+        response = self.client.get(path=path,**self.auth_headers)
 
         shortener = Shortener.objects.all()
         serializer = ShortenerListSerializer(shortener, many=True)
@@ -57,7 +67,7 @@ class ShortenerViewSetTestCase(test.APITestCase):
 
     def test_list_no_permission(self):
         path = reverse('shortener:shortener-list')
-        response = self.client.get(path)
+        response = self.client.get(path=path)
 
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
@@ -65,7 +75,7 @@ class ShortenerViewSetTestCase(test.APITestCase):
 
     def test_create(self):
         path = reverse('shortener:shortener-list')
-        response = self.client.post(path, self.valid_data, **self.auth_headers)
+        response = self.client.post(path=path,data=self.valid_data, **self.auth_headers)
         content = json.loads(response.content)
 
         serializer = ShortenerCreateUpdateSerializer(data=self.valid_data)
@@ -84,7 +94,7 @@ class ShortenerViewSetTestCase(test.APITestCase):
 
     def test_create_no_valid_data(self):
         path = reverse('shortener:shortener-list')
-        response = self.client.post(path, self.no_valid_data, **self.auth_headers)
+        response = self.client.post(path=path, data=self.no_valid_data, **self.auth_headers)
 
         serializer = ShortenerCreateUpdateSerializer(data=self.no_valid_data)
         serializer.is_valid(raise_exception=False)
@@ -99,11 +109,49 @@ class ShortenerViewSetTestCase(test.APITestCase):
         self.assertEquals(response.status_code, status.HTTP_401_UNAUTHORIZED)
         self.assertNotEquals(response.status_code, status.HTTP_201_CREATED)
 
+    # --------------------------------- Update --------------------------------------
+
+    def test_update(self):
+        path = reverse('shortener:shortener-detail',kwargs={'pk':1})
+        response = self.client.put(path=path, data=self.update_valid_date, **self.auth_headers)
+        content = json.loads(response.content)
+
+        serializer = ShortenerCreateUpdateSerializer(data=self.update_valid_date)
+        serializer.is_valid(raise_exception=True)
+
+        self.assertEquals(response.status_code, status.HTTP_200_OK)
+
+        self.assertTrue(content.get('user'))
+        self.assertTrue(content.get('short'))
+        self.assertTrue(content.get('created_at'))
+        self.assertTrue(content.get('updated_at'))
+
+        self.assertEqual(content.get('long_url'), serializer.data.get('long_url'))
+        self.assertEqual(content.get('password'), serializer.data.get('password'))
+        self.assertEqual(content.get('status'), serializer.data.get('status'))
+
+    def test_update_no_valid_data(self):
+        path = reverse('shortener:shortener-detail',kwargs={'pk':1})
+        response = self.client.put(path=path, data=self.no_update_valid_date, **self.auth_headers)
+
+        serializer = ShortenerCreateUpdateSerializer(data=self.no_update_valid_date)
+        serializer.is_valid(raise_exception=False)
+
+        self.assertEquals(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertNotEquals(response.status_code, status.HTTP_201_CREATED)
+
+    def test_update_no_permission(self):
+        path = reverse('shortener:shortener-detail',kwargs={'pk':1})
+        response = self.client.put(path=path, data=self.update_valid_date)
+
+        self.assertEquals(response.status_code, status.HTTP_401_UNAUTHORIZED)
+        self.assertNotEquals(response.status_code, status.HTTP_201_CREATED)
+
     # --------------------------------- Retrieve --------------------------------------
 
     def test_retrieve(self):
         path = reverse('shortener:shortener-detail', kwargs={'pk': 1})
-        response = self.client.get(path, **self.auth_headers)
+        response = self.client.get(path=path, **self.auth_headers)
 
         shortener = Shortener.objects.get(pk=1)
         serializer = ShortenerDetailSerializer(shortener)
@@ -113,7 +161,7 @@ class ShortenerViewSetTestCase(test.APITestCase):
 
     def test_retrieve_no_permission(self):
         path = reverse('shortener:shortener-detail', kwargs={'pk': 1})
-        response = self.client.get(path)
+        response = self.client.get(path=path)
 
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
@@ -121,7 +169,7 @@ class ShortenerViewSetTestCase(test.APITestCase):
 
     def test_delete(self):
         path = reverse('shortener:shortener-detail', kwargs={'pk': 1})
-        response = self.client.delete(path, **self.auth_headers)
+        response = self.client.delete(path=path, **self.auth_headers)
 
         shortener = Shortener.objects.all().count()
 
@@ -130,6 +178,6 @@ class ShortenerViewSetTestCase(test.APITestCase):
 
     def test_delete_no_permission(self):
         path = reverse('shortener:shortener-detail', kwargs={'pk': 1})
-        response = self.client.delete(path)
+        response = self.client.delete(path=path)
 
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
