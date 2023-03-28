@@ -1,5 +1,5 @@
-from rest_framework import viewsets
-
+from rest_framework import viewsets, permissions
+from apps.shortener import permissions as custom_permissions
 from apps.shortener.models import Shortener
 from apps.shortener.api.serializer import (
     ShortenerListSerializer,
@@ -11,10 +11,10 @@ from apps.shortener.api.serializer import (
 class ShortenerViewSet(viewsets.ModelViewSet):
     model = Shortener
     serializer_class = ShortenerDetailSerializer
-
+    permission_classes = [permissions.IsAuthenticated, custom_permissions.IsUser]
 
     def get_queryset(self):
-        qs = self.model.objects.all()
+        qs = self.model.objects.all().filter(user=self.request.user)
         return qs
 
     def get_serializer_class(self):
