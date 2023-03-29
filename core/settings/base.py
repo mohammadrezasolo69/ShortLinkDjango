@@ -2,7 +2,6 @@ import os
 import environ
 from pathlib import Path
 
-
 env = environ.Env()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -47,6 +46,7 @@ MY_APPS = [
     'apps.utils.apps.UtilsConfig',
     'apps.accounts.apps.AccountsConfig',
     'apps.shortener.apps.ShortenerConfig',
+    'apps.statistic.apps.StatisticConfig',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + MY_APPS
