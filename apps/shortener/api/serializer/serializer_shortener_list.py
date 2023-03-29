@@ -8,7 +8,7 @@ class ShortenerListSerializer(serializers.ModelSerializer):
     short_url = serializers.URLField(source='get_short_url')
     created_at = serializers.CharField(source='get_created_at')
     expired_at = serializers.CharField(source='set_expired_at')
-    category = CategoryBaseSerializer()
+    category = CategoryBaseSerializer(required=False)
 
     # TODO:count click in link
 

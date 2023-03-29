@@ -8,7 +8,7 @@ from apps.shortener.api.serializer import CategoryBaseSerializer
 class ShortenerDetailSerializer(serializers.ModelSerializer):
     short_url = serializers.URLField(source='get_short_url')
     expired_at = serializers.CharField(source='set_expired_at')
-    category = CategoryBaseSerializer()
+    category = CategoryBaseSerializer(required=False)
     # TODO:add Statistics
 
     class Meta:

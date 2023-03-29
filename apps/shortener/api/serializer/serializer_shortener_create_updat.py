@@ -5,7 +5,7 @@ from apps.shortener.api.serializer import CategoryBaseSerializer
 
 
 class ShortenerCreateUpdateSerializer(serializers.ModelSerializer):
-    category = CategoryBaseSerializer()
+    category = CategoryBaseSerializer(required=False)
 
     class Meta:
         model = Shortener
