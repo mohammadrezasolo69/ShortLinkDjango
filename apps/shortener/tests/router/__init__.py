@@ -1,1 +1,2 @@
 from .test_router_shortener import ShortenerRouterTestCase
+from .test_router_category import CategoryRouterTestCase
