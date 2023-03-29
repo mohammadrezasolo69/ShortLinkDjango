@@ -1,16 +1,33 @@
 - Custom Permission
   - write custom permission for shortener
 
+
+- Custom Validetor
+ - NoAspacesAllowed
+
+
 - Testing
   - Shortener
     - test model
     - test router
     - test viewset(create,update,list,detail,delete) with jwt and permission
 
+  - Category
+    - test model
+    - test router
+    - test viewset(create,update,list,detail,delete) with jwt and permission
+
+
 - Optimize Database
   - Shortener
     - use select_related for user and category
+  - Category
+    - use select_related for user
+
 
 - Cache
  - Shortener
     - cache action detail
+ - Category
+    - cache action detail
+
