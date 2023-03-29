@@ -21,3 +21,7 @@ class Statistic(models.Model):
 
     def __str__(self):
         return self.ip
+
+    @property
+    def get_time_click(self):
+        return self.time_click.strftime('%H:%M - %Y/%m/%d')
