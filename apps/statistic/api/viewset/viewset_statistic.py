@@ -1,6 +1,6 @@
 from rest_framework import generics
 from apps.statistic.models import Statistic
-from apps.statistic.api.seriaizer import StatisticListSerializer
+from apps.statistic.api.serializer import StatisticListSerializer
 
 
 class StatisticListView(generics.ListAPIView):
