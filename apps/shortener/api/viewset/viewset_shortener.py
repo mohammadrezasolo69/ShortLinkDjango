@@ -2,7 +2,7 @@ from django.utils.decorators import method_decorator
 from django.utils.functional import cached_property
 from django.views.decorators.cache import cache_page
 from rest_framework import viewsets, permissions
-from apps.shortener import permissions as custom_permissions
+from apps.utils import permissions as custom_permissions
 from apps.shortener.models import Shortener
 from apps.shortener.api.serializer import (
     ShortenerListSerializer,
