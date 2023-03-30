@@ -1,0 +1,1 @@
+from .serializer_statistic_list import StatisticListSerializer
