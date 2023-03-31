@@ -8,5 +8,5 @@ class StatisticListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Statistic
         fields = (
-            'ip', 'os', 'browser', 'country', 'language', 'time_click'
+            'ip', 'os', 'browser','language', 'time_click'
         )
