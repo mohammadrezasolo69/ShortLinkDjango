@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from django.db.models import Count, Prefetch
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.contrib.sites.models import Site
@@ -72,3 +73,15 @@ class Shortener(DateBasic, StatusBasic):
         if not self.expired_at:
             return 'not set'
         return self.get_expired_at
+
+    # @property
+    # def get_count_click(self):
+    #     query = Shortener.objects.select_related('category', 'user').get(pk=self.pk)
+    #     return query.statistics.count()
+
+    @property
+    def get_count_click(self):
+        query = Shortener.objects.only('id').get(id=self.pk)
+        print(query)
+        return query.statistics.count()
+
