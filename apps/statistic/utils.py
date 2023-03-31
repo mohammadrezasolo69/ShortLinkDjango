@@ -34,3 +34,17 @@ class UserAgentParser(object):
     @property
     def get_user_language(self):
         return get_language_from_request(self.request)
+
+
+# from apps.statistic.models import Statistic
+#
+#
+# def save_redirector_statistic(request, shortener):
+#     user_agent = UserAgentParser(request)
+#     obj = Statistic.objects.create(
+#         ip=user_agent.get_user_ip,
+#         os=user_agent.get_user_os,
+#         browser=user_agent.get_user_browser,
+#         language=user_agent.get_user_language,
+#         shortener=shortener
+#     )

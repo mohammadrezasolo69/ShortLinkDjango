@@ -11,7 +11,7 @@ class Statistic(models.Model):
         verbose_name_plural = _('Statistics')
         ordering = ('-time_click',)
 
-    ip = models.CharField(_('IP'), max_length=45, primary_key=True, validators=[validator.IpChecker])
+    ip = models.CharField(_('IP'), max_length=45, validators=[validator.IpChecker])
     os = models.CharField(_('os'), max_length=200)
     time_click = models.DateTimeField(_('time click'), auto_now_add=True)
     browser = models.CharField(_('Browser'), max_length=200)
