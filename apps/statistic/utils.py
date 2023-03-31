@@ -10,11 +10,17 @@ class UserAgentParser(object):
 
     @property
     def get_user_os(self):
-        return self.parser['os']['name']
+        try:
+            return self.parser['os']['name']
+        except:
+            return 'Unknown'
 
     @property
     def get_user_browser(self):
-        return self.parser['browser']['name']
+        try:
+            return self.parser['browser']['name']
+        except:
+            return 'Unknown'
 
     @property
     def get_user_ip(self):
