@@ -16,6 +16,7 @@ drf-spectacular==0.26.1
 drf-spectacular-sidecar==2023.3.1
 Faker==18.3.1
 gunicorn==20.1.0
+httpagentparser==1.9.5
 inflection==0.5.1
 jdatetime==4.1.0
 jsonschema==4.17.3
