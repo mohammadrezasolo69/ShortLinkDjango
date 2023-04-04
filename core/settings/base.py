@@ -2,7 +2,6 @@ import os
 import environ
 from pathlib import Path
 
-
 env = environ.Env()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -19,7 +18,7 @@ DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = ["*"]
 
-SITE_ID = 1
+
 
 # Application definition
 DJANGO_APPS = [
@@ -47,10 +46,12 @@ MY_APPS = [
     'apps.utils.apps.UtilsConfig',
     'apps.accounts.apps.AccountsConfig',
     'apps.shortener.apps.ShortenerConfig',
+    'apps.statistic.apps.StatisticConfig',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + MY_APPS
 
+SITE_ID = 1
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -59,6 +60,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'apps.statistic.middleware.UserAgentMiddleware',
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -153,5 +155,6 @@ MEDIA_ROOT = BASE_DIR / '../media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
+
 
 from core.configs import *

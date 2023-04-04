@@ -14,3 +14,6 @@ CSRF_TRUSTED_ORIGINS = 'xoxoxoxoxoxoxxoxoxox'
 
 # Redis
 REDIS_LOCATION = 'xoxoxoxoxoxoxxoxoxox'
+
+# CELERY
+CELERY_BROKER_URL = 'xoxoxoxoxoxoxxoxoxox'

@@ -3,7 +3,7 @@ from django.views.decorators.cache import cache_page
 from rest_framework import viewsets, permissions
 
 from apps.shortener.models import Category
-from apps.shortener import permissions as custom_permissions
+from apps.utils import permissions as custom_permissions
 from apps.shortener.api.serializer import (
     CategoryListSerializer,
     CategoryDetailSerializer,

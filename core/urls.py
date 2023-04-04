@@ -5,7 +5,8 @@ from drf_spectacular.views import (
 )
 
 urlpatterns_api = [
-    path('', include('apps.shortener.urls_api'), name='main_shortener')
+    path('', include('apps.shortener.urls_api'), name='main_shortener'),
+    path('', include('apps.statistic.urls_api'), name='main_statistic'),
 ]
 
 urlpatterns = [

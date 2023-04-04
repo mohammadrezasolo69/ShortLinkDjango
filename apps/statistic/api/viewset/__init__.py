@@ -1,0 +1,1 @@
+from .viewset_statistic import StatisticListView
