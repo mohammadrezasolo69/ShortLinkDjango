@@ -1,9 +1,10 @@
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from rest_framework import viewsets, permissions
-# from rest_framework.decorators import action
-# from django.shortcuts import redirect
-# from apps.statistic.utils import save_redirector_statistic
+from rest_framework.decorators import action
+from django.shortcuts import redirect
+
+from apps.statistic.tasks import save_redirector_statistic
 from apps.utils import permissions as custom_permissions
 from apps.shortener.models import Shortener
 from apps.shortener.api.serializer import (
@@ -39,9 +40,9 @@ class ShortenerViewSet(viewsets.ModelViewSet):
     def retrieve(self, request, *args, **kwargs):
         return super().retrieve(request, *args, **kwargs)
 
-    # @action(detail=True, methods=['get'], name='redirect')
-    # def redirect(self, request,pk=None):
-    #     shortener = self.get_object()
-    #     print(shortener)
-    #     save_redirector_statistic(request=request, shortener=shortener)
-    #     return redirect(shortener.long_url)
+    @action(detail=True, methods=['get'], name='redirect')
+    def redirect(self, request,pk=None):
+        shortener = self.get_object()
+        print(shortener)
+        save_redirector_statistic(request=request, shortener=shortener)
+        return redirect(shortener.long_url)
