@@ -3,7 +3,7 @@ from core.settings.base import env
 # Redis
 CACHES = {
     'default': {
-        'BACKEND': 'django_redis.cache.RedisCache',
+        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
         'LOCATION': env("REDIS_LOCATION", default="redis://localhost:6379"),
     }
 }

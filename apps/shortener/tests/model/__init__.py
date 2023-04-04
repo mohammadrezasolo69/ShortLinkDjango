@@ -1,0 +1,2 @@
+from .test_model_category import CategoryModelTestCase
+from .test_model_shortener import ShortenerModelTestCase

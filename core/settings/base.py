@@ -2,7 +2,6 @@ import os
 import environ
 from pathlib import Path
 
-
 env = environ.Env()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -19,6 +18,8 @@ DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = ["*"]
 
+
+
 # Application definition
 DJANGO_APPS = [
     'django.contrib.admin',
@@ -27,11 +28,7 @@ DJANGO_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-]
-
-LOCAL_APPS = [
-    "django_seed",
-    "debug_toolbar",
+    'django.contrib.sites',
 ]
 
 THIRD_PARTY_APPS = [
@@ -42,15 +39,19 @@ THIRD_PARTY_APPS = [
     'corsheaders',
     'modeltranslation',
     'django_filters',
+    'colorfield',
 ]
 
 MY_APPS = [
     'apps.utils.apps.UtilsConfig',
     'apps.accounts.apps.AccountsConfig',
+    'apps.shortener.apps.ShortenerConfig',
+    'apps.statistic.apps.StatisticConfig',
 ]
 
-INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS + MY_APPS
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + MY_APPS
 
+SITE_ID = 1
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -59,8 +60,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
-
+    'apps.statistic.middleware.UserAgentMiddleware',
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -130,7 +130,7 @@ LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 # Config MultiLanguage
 LANGUAGES = (('en', 'English'),)
-LOCALE_PATHS = [os.path.join(BASE_DIR, 'locale/')]
+LOCALE_PATHS = [os.path.join(BASE_DIR, '../locale/')]
 
 USE_I18N = True
 USE_L10N = True
@@ -144,10 +144,10 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'assets')
 ]
 
-STATIC_ROOT = BASE_DIR / 'static'
+STATIC_ROOT = BASE_DIR / '../static'
 
 MEDIA_URL = 'media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = BASE_DIR / '../media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -155,5 +155,6 @@ MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
+
 
 from core.configs import *

@@ -1,0 +1,1 @@
+from .permission_is_user import IsUser
