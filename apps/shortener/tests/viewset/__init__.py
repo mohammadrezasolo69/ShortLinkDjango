@@ -1,0 +1,2 @@
+from .test_viewset_shortener import ShortenerViewSetTestCase
+from .test_viewset_category import CategoryViewSetTestCase

@@ -1,0 +1,62 @@
+version: '3.3'
+
+services:
+  app:
+    build: .
+    container_name: "app_short_link"
+    restart: always
+    env_file:
+      - .env
+    expose:
+      - 8000
+    volumes:
+      - .:/app/
+      - ./static:/app/static
+      - ./media:/app/media
+      - /var/log:/var/log
+    command: >
+      sh -c "
+        python3 manage.py makemigrations;
+        python3 manage.py migrate --noinput;
+        python3 manage.py collectstatic --noinput;
+        gunicorn --bind=0.0.0.0:8000 --timeout=90 --reload core.wsgi:application;
+      "
+
+  nginx:
+    image: nginx:latest
+    container_name: "nginx_short_link"
+    restart: always
+    ports:
+      - "888:888"
+    volumes:
+      - ./static:/static/
+      - ./media:/media/
+      - /var/logn/ginx/:/var/log/nginx/
+      - ./nginx:/etc/nginx/conf.d
+    depends_on:
+      - app
+
+  db:
+    image: postgres:14.1
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_DB=ShortLink
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - postgres-data:/var/lib/postgresql/data/
+
+  redis:
+    image: 'redis:latest'
+    container_name: 'redis_short_link'
+    restart: always
+    ports:
+      - 6379:6379
+    volumes:
+        - redis-data:/data
+        -
+
+volumes:
+    postgres-data:
+    redis-data:

@@ -4,10 +4,15 @@ from drf_spectacular.views import (
     SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 )
 
-urlpatterns_api = []
+urlpatterns_api = [
+    path('', include('apps.shortener.urls_api'), name='main_shortener'),
+    path('', include('apps.statistic.urls_api'), name='main_statistic'),
+]
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    path('api-auth/', include('rest_framework.urls')),
 
     # my api
     path('api/v1/', include(urlpatterns_api)),
@@ -15,9 +20,9 @@ urlpatterns = [
     # urls drf_spectacular
     path('schema/', SpectacularAPIView.as_view(api_version='v1'), name='schema'),
     path('redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
-    path('', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),path('__debug__/', include('debug_toolbar.urls')),]
-
-
+    path('', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+    path('__debug__/', include('debug_toolbar.urls')),
+]
 
 # -------------------------------- Config Static and Media File -----------------------------------
 from django.conf import settings
